@@ -8,9 +8,9 @@ type Joke = {
     content: string;
 };
 function JokeMainScreen() {
-    const [jokes, setJokes] = useState([]);
-    const [randomJoke, setRandomJoke] = useState("");
-    console.log("silly");
+    const [jokes, setJokes] = useState<Joke[]>([]); // Array of jokes
+    const [randomJoke, setRandomJoke] = useState<Joke | null>(null); // Joke or null
+
     // Fetch on component mount
     useEffect(() => {
         console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
@@ -24,7 +24,7 @@ function JokeMainScreen() {
                 console.error("Error fetching jokes", error);
             });
     }, []);
-    // console.log(jokes);
+
     // random joke get
     const fetchRandomJoke = () => {
         axios
@@ -36,12 +36,12 @@ function JokeMainScreen() {
                 console.error("Error fetching random joke", error);
             });
     };
-    console.log(randomJoke);
+
     return (
         <div className="">
             <h1>Dad Jokes</h1>
             <button onClick={fetchRandomJoke}>Get a Random Joke</button>
-            <p>{randomJoke.content}</p>
+            <p>{randomJoke ? randomJoke.content : "Loading..."}</p>
 
             <h2>All Jokes</h2>
             <ul>
