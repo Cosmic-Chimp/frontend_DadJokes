@@ -9,7 +9,7 @@ function JokeMainScreen() {
     // Fetch on component mount
     useEffect(() => {
         axios
-            .get("http://localhost:5000/api/jokes")
+            .get("${process.env.NEXT_PUBLIC_API_URL/api/jokes")
             .then((response) => {
                 setJokes(response.data);
             })
@@ -21,7 +21,7 @@ function JokeMainScreen() {
     // random joke get
     const fetchRandomJoke = () => {
         axios
-            .get("http://localhost:5000/api/jokes/random")
+            .get("${process.env.NEXT_PUBLIC_API_URL}/jokes/random")
             .then((response) => {
                 setRandomJoke(response.data);
             })
